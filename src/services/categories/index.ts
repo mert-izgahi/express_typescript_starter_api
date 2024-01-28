@@ -1,6 +1,6 @@
-import Category from "./model";
-import CategoryRepository from "./repository";
-import CategoryController from "./controller";
+import { Category } from "./model";
+import { CategoryRepository } from "./repository";
+import { CategoryController } from "./controller";
 import createBaseRouter from "../../@base/base.router";
 
 const endPointName: string = "/categories";

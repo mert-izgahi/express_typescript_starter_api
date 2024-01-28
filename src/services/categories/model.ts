@@ -1,7 +1,7 @@
 import { Schema } from "mongoose";
 import { BaseModel, BaseDocument } from "../../@base";
 
-export interface ICategory extends BaseDocument {
+interface ICategory extends BaseDocument {
     name: string;
     description: string;
 }
@@ -23,4 +23,4 @@ const categorySchema = new Schema<ICategory>({
 });
 
 const Category = BaseModel.discriminator<ICategory>("Category", categorySchema);
-export default Category;
+export { Category, ICategory };
