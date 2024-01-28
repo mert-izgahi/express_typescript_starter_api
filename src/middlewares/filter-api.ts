@@ -19,7 +19,7 @@ export const filterApi = async (
         page: Number(page),
         limit: Number(limit),
         sort,
-        order,
+        order: order === "asc" ? 1 : -1,
         search,
     };
 

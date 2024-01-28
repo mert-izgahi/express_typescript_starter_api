@@ -45,3 +45,10 @@ export interface IProduct extends Document, IBase {
     size: string;
     category: string;
 }
+
+export interface IUser extends Document, IBase {
+    name: string;
+    email: string;
+    password: string;
+    role?: string;
+}
