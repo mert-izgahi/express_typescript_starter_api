@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from "mongoose";
+import { Schema } from "mongoose";
 import { BaseModel, BaseDocument } from "../../@base";
 
 export interface ICategory extends BaseDocument {

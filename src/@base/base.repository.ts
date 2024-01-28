@@ -1,21 +1,11 @@
 import { Model, Document, FilterQuery } from "mongoose";
 import { IFilterOptions } from "./types";
-
 export class BaseRepository<T extends Document> {
     constructor(private model: Model<T>) {}
 
     async createRecord(data: any): Promise<T> {
         try {
             return await this.model.create(data);
-        } catch (error) {
-            console.log(error);
-            throw error;
-        }
-    }
-
-    async getRecordBySlug(slug: string): Promise<T | null> {
-        try {
-            return await this.model.findOne({ slug });
         } catch (error) {
             console.log(error);
             throw error;
@@ -52,15 +42,19 @@ export class BaseRepository<T extends Document> {
     async getRecords(
         filter: FilterQuery<T>,
         options?: IFilterOptions
-    ): Promise<T[]> {
+    ): Promise<{ results: T[]; total: number; totalPages: number }> {
         try {
             const { page, limit, sort, order } = options as IFilterOptions;
             const skip = (page - 1) * limit;
-            return await this.model
+            const results = await this.model
                 .find(filter)
                 .sort({ [sort]: order === "asc" ? 1 : -1 })
                 .skip(skip)
                 .limit(limit);
+
+            const total = await this.model.countDocuments(filter);
+            const totalPages = Math.ceil(total / limit);
+            return { results, total, totalPages };
         } catch (error) {
             console.log(error);
             throw error;

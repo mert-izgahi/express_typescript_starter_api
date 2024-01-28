@@ -8,9 +8,10 @@ export class BaseController<T extends Document> {
 
     getAll = asyncWrapper(async (req: Request, res: Response) => {
         const filterOptions = res.locals.filterOptions;
-        const filter: FilterQuery<T> = {};
+        const filter: FilterQuery<T> = {
+            name: { $regex: res.locals.filterOptions.search, $options: "i" },
+        };
         const results = await this.repository.getRecords(filter, filterOptions);
-        // sendResponse(res, results, "Records retrieved successfully");
         this._sendResponse(res, results, "Records retrieved successfully");
     });
 

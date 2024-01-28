@@ -36,6 +36,22 @@ BaseSchema.pre<BaseDocument>("save", function (next) {
     next();
 });
 
+BaseSchema.set("toJSON", {
+    virtuals: true,
+    transform: function (doc, ret) {
+        delete ret._id;
+        delete ret.__v;
+    },
+});
+
+BaseSchema.set("toObject", {
+    virtuals: true,
+    transform: function (doc, ret) {
+        delete ret._id;
+        delete ret.__v;
+    },
+});
+
 const BaseModel = mongoose.model<BaseDocument>("Base", BaseSchema);
 
 export default BaseModel;

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { ICategory } from "./model";
+import Category from "./model";
 import CategoryRepository from "./repository";
 import { BaseController } from "../../@base";
 import { asyncWrapper } from "../../middlewares";
@@ -12,7 +13,9 @@ export class CategoryController extends BaseController<ICategory> {
 
     getOneBySlug = asyncWrapper(async (req: Request, res: Response) => {
         const { slug } = req.params;
-        const result = await this.repository.getRecordBySlug(slug);
+
+        const result = await Category.findOne({ slug });
+
         sendResponse(res, result, "Record retrieved successfully");
     });
 }

@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import { IFilterOptions } from "../types";
-import { logger } from "../helpers";
 
 export const filterApi = async (
     req: Request<{}, {}, {}, IFilterOptions>,
