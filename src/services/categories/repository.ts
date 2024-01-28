@@ -6,6 +6,11 @@ export class CategoryRepository extends BaseRepository<ICategory> {
     constructor(model: Model<ICategory>) {
         super(model);
     }
+
+    // Add custom methods here
+    getOneBySlug = async (slug: string) => {
+        return await this.model.findOne({ slug });
+    };
 }
 
 export default CategoryRepository;

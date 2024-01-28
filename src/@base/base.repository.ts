@@ -1,7 +1,7 @@
 import { Model, Document, FilterQuery } from "mongoose";
-import { IFilterOptions } from "./types";
+import { IFilterOptions } from "./base.types";
 export class BaseRepository<T extends Document> {
-    constructor(private model: Model<T>) {}
+    constructor(protected model: Model<T>) {}
 
     async createRecord(data: any): Promise<T> {
         try {
