@@ -1,5 +1,5 @@
 import { FilterQuery } from "mongoose";
-
+import { IBaseDocument } from "../@base/base.types";
 export interface IFilterOptions {
     page: number;
     limit: number;
@@ -23,20 +23,14 @@ export interface IModel<T> {
 }
 
 // Application Models
-interface IBase {
-    _id?: string;
-    createdAt?: Date;
-    updatedAt?: Date;
-    slug?: string; // Auto generated
-}
 
-export interface ICategory extends Document, IBase {
+export interface ICategory extends Document, IBaseDocument {
     _id?: string;
     name: string;
     description: string;
 }
 
-export interface IProduct extends Document, IBase {
+export interface IProduct extends Document, IBaseDocument {
     name: string;
     description: string;
     price: number;
@@ -46,7 +40,7 @@ export interface IProduct extends Document, IBase {
     category: string;
 }
 
-export interface IUser extends Document, IBase {
+export interface IUser extends Document, IBaseDocument {
     name: string;
     email: string;
     password: string;
