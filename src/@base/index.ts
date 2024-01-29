@@ -1,5 +1,4 @@
 import { BaseRepository } from "./base.repository";
 import { BaseController } from "./base.controller";
-import BaseModel from "./base.model";
-import { BaseDocument } from "./base.model";
-export { BaseRepository, BaseController, BaseModel, BaseDocument };
+import { BaseModel, BaseDocument, BaseSchema } from "./base.model";
+export { BaseRepository, BaseController, BaseModel, BaseDocument, BaseSchema };

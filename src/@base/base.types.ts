@@ -5,3 +5,11 @@ export interface IFilterOptions {
     order: string;
     search: string;
 }
+
+export interface IBaseDocument {
+    id?: string;
+    createdAt?: Date;
+    updatedAt?: Date;
+    slug?: string;
+    deletedAt?: Date;
+}

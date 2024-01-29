@@ -1,29 +1,24 @@
 import mongoose from "mongoose";
+import { AuthModel, AuthDocument } from "../../@auth";
+
+interface IUserModel extends Document, AuthDocument {
+    bio: string;
+    image: string;
+}
 
 const schema = new mongoose.Schema({
-    name: {
+    bio: {
         type: String,
-        required: [true, "Name is required"],
+        default: null,
+        max: [100, "Bio must be less than 100 characters"],
     },
-    email: {
+
+    image: {
         type: String,
-        required: [true, "Email is required"],
-        unique: [true, "Email must be unique"],
-    },
-    password: {
-        type: String,
-        required: [true, "Password is required"],
-    },
-    role: {
-        type: String,
-        enum: {
-            values: ["admin", "user"],
-            message: "Role must be either 'admin' or 'user'",
-        },
-        default: "user",
+        default: null,
     },
 });
 
-const User = mongoose.model("User", schema);
+const User = AuthModel.discriminator<IUserModel>("User", schema);
 
-export default User;
+export { User, IUserModel };

@@ -1,6 +1,7 @@
-import mongoose, { Document } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 import slugify from "slugify";
-export interface BaseDocument extends Document {
+
+interface BaseDocument extends Document {
     _id?: string;
     name: string;
     createdAt?: Date;
@@ -54,4 +55,4 @@ BaseSchema.set("toObject", {
 
 const BaseModel = mongoose.model<BaseDocument>("Base", BaseSchema);
 
-export default BaseModel;
+export { BaseModel, BaseDocument, BaseSchema };

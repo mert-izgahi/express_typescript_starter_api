@@ -1,5 +1,5 @@
-import { Schema } from "mongoose";
-import { BaseModel, BaseDocument } from "../../@base";
+import mongoose, { Schema } from "mongoose";
+import { BaseDocument, BaseSchema } from "../../@base";
 
 interface ICategory extends BaseDocument {
     name: string;
@@ -20,7 +20,7 @@ const categorySchema = new Schema<ICategory>({
         required: [true, "Description is required"],
         max: [100, "Description must be less than 100 characters"],
     },
-});
+}).add(BaseSchema);
 
-const Category = BaseModel.discriminator<ICategory>("Category", categorySchema);
+const Category = mongoose.model<ICategory>("Category", categorySchema);
 export { Category, ICategory };

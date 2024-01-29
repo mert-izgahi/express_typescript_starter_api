@@ -1,11 +1,10 @@
-import { Category } from "./model";
-import { CategoryRepository } from "./repository";
-import { CategoryController } from "./controller";
+import { BaseController, BaseRepository } from "../../@base";
 import createBaseRouter from "../../@base/base.router";
+import { Category, ICategory } from "./model";
 
 const endPointName: string = "/categories";
-const repository = new CategoryRepository(Category);
-const controller = new CategoryController(repository);
+const repository = new BaseRepository<ICategory>(Category);
+const controller = new BaseController<ICategory>(repository);
 const router = createBaseRouter(controller, endPointName);
 
 export { router };

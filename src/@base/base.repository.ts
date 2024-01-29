@@ -5,7 +5,10 @@ export class BaseRepository<T extends Document> {
 
     async createRecord(data: any): Promise<T> {
         try {
-            return await this.model.create(data);
+            const record = new this.model(data);
+            await record.save();
+
+            return record;
         } catch (error) {
             console.log(error);
             throw error;
