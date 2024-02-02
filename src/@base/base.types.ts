@@ -1,15 +1,12 @@
-export interface IFilterOptions {
-    page: number;
-    limit: number;
-    sort: string;
-    order: string;
-    search: string;
-}
-
 export interface IBaseDocument {
     id?: string;
     createdAt?: Date;
     updatedAt?: Date;
     slug?: string;
     deletedAt?: Date;
+}
+
+export interface IRoles {
+    action: "createOne" | "getAll" | "getOneById" | "updateOne" | "deleteOne";
+    role: "*" | "admin" | "user";
 }

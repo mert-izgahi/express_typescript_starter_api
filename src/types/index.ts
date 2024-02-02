@@ -1,29 +1,6 @@
-import { FilterQuery } from "mongoose";
 import { IBaseDocument } from "../@base/base.types";
-export interface IFilterOptions {
-    page: number;
-    limit: number;
-    sort: string;
-    order: string;
-    search: string;
-}
-
-export interface IModel<T> {
-    createRecord(data: T): Promise<T>;
-    updateRecordById(id: string, data: Partial<T>): Promise<T>;
-    deleteRecordById(id: string): Promise<T>;
-    deleteRecord(filter: FilterQuery<T>): Promise<T>;
-    getRecord(filter: FilterQuery<T>): Promise<T>;
-    getRecordById(id: string): Promise<T>;
-    getRecordBySlug(slug: string): Promise<T>;
-    getRecords(
-        filter: FilterQuery<T>,
-        options?: IFilterOptions
-    ): Promise<{ results: T[]; total: number; totalPages: number }>;
-}
 
 // Application Models
-
 export interface ICategory extends Document, IBaseDocument {
     _id?: string;
     name: string;

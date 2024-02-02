@@ -1,6 +1,14 @@
-import AuthController from "./auth.controller";
-import AuthRepository from "./auth.repository";
-import AuthRouter from "./auth.router";
-import { AuthModel, AuthDocument } from "./auth.model";
-
-export { AuthController, AuthRepository, AuthModel, AuthDocument, AuthRouter };
+// import AccountController from "./account.controller";
+// import AccountRepository from "./account.repository";
+// import { AccountRouter, UsersRouter } from "./account.router";
+// import { AccountModel, AccountSchema } from "./account.model";
+// import { IAccountDocument } from "./account.types";
+// export {
+//     AccountController,
+//     AccountRepository,
+//     AccountModel,
+//     IAccountDocument,
+//     AccountRouter,
+//     UsersRouter,
+//     AccountSchema,
+// };

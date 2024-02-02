@@ -1,7 +1,25 @@
 import { Model, Document, FilterQuery } from "mongoose";
-import { IFilterOptions } from "./base.types";
-export class BaseRepository<T extends Document> {
+import { IFilterOptions, IRepository } from "../@types";
+import { IUser } from "../services/@users/model";
+
+export class BaseRepository<T extends Document> implements IRepository<T> {
     constructor(protected model: Model<T>) {}
+    deleteRecord(filter: FilterQuery<T>): Promise<T | null> {
+        try {
+            return this.model.findOneAndDelete(filter);
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+    getRecord(filter: FilterQuery<T>): Promise<T | null> {
+        try {
+            return this.model.findOne(filter);
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
 
     async createRecord(data: any): Promise<T> {
         try {
@@ -45,11 +63,11 @@ export class BaseRepository<T extends Document> {
     async getRecords(
         filter: FilterQuery<T>,
         options?: IFilterOptions
-    ): Promise<{ results: T[]; total: number; totalPages: number }> {
+    ): Promise<{ rows: T[]; total: number; totalPages: number }> {
         try {
             const { page, limit, sort, order } = options as IFilterOptions;
             const skip = (page - 1) * limit;
-            const results = await this.model
+            const rows = await this.model
                 .find(filter)
                 .sort({ [sort]: order === "asc" ? 1 : -1 })
                 .skip(skip)
@@ -57,7 +75,7 @@ export class BaseRepository<T extends Document> {
 
             const total = await this.model.countDocuments(filter);
             const totalPages = Math.ceil(total / limit);
-            return { results, total, totalPages };
+            return { rows, total, totalPages };
         } catch (error) {
             console.log(error);
             throw error;
