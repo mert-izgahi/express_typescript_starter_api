@@ -1,10 +1,11 @@
-import { asyncWrapper } from "./../../@middlewares/async-wrapper";
+// Static Imports
 import express, { Request, Response } from "express";
-import { BaseRepository, BaseController } from "../../@base";
-import createBaseRouter from "../../@base/base.router";
-import { User, IUser } from "./model";
+import { BaseRepository, BaseController, createBaseRouter } from "../../@base";
+import { asyncWrapper } from "./../../@middlewares";
 import { sendResponse } from "../../@helpers";
-import { authorizedFor } from "../../@middlewares/authorized-for";
+
+// Dynamic Imports
+import { User, IUser } from "./model";
 
 class UsersRepository extends BaseRepository<IUser> {
     constructor() {

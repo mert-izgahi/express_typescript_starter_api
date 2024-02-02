@@ -12,6 +12,7 @@ import { router } from "./src/services/router";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 // ENV
 const PORT = configs.PORT;
 const MONGO_URI = configs.MONGO_URI;
