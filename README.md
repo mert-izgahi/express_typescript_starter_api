@@ -4,5 +4,9 @@ This is a starter project of api services with express and typescript. The proje
 
 # DON'T DELETE OR CHANGE
 
--   @auth folder
 -   @base folder
+-   @types folder
+-   @errors folder
+-   @middlewares folder
+-   @helpers folder
+-   services/@auth folder

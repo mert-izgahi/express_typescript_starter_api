@@ -6,6 +6,7 @@ const repository = new BaseRepository<ICategory>(Category);
 const controller = new BaseController<ICategory>(repository);
 const router = createBaseRouter(controller, {
     prefix: "/categories",
+    roles: ["*"],
 });
 
 export { router };
