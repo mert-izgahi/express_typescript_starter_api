@@ -4,13 +4,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import config from "../../../config";
 import { BaseDocument, BaseSchema } from "../../@base";
-
-interface TokenPayload {
-    _id: string;
-    name: string;
-    email: string;
-    role: string;
-}
+import { TokenPayload } from "../../@types";
 
 interface IUser extends BaseDocument {
     name: string;
@@ -18,7 +12,11 @@ interface IUser extends BaseDocument {
     password: string;
     role: string;
     comparePassword(candidatePassword: string): Promise<boolean>;
-    generateAccessToken(): Promise<string>;
+    generateTokens({
+        session,
+    }: {
+        session: string;
+    }): Promise<{ accessToken: string; refreshToken: string }>;
 }
 const AccountSchema = new mongoose.Schema(
     {
@@ -79,17 +77,30 @@ AccountSchema.methods.comparePassword = function (
     return isMatch;
 };
 
-AccountSchema.methods.generateAccessToken = async function () {
+AccountSchema.methods.generateTokens = async function ({
+    session,
+}: {
+    session: string;
+}): Promise<{ accessToken: string; refreshToken: string }> {
     const payload: TokenPayload = {
         _id: this._id,
         name: this.name,
         email: this.email,
         role: this.role,
+        session: session,
     };
-    const token = await jwt.sign(payload, config.JWT_SECRET, {
-        expiresIn: config.JWT_EXPIRE,
+    const accessToken = await jwt.sign(payload, config.JWT_SECRET, {
+        //expiresIn: config.JWT_EXPIRE,
+        expiresIn: "3s",
     });
-    return token;
+
+    const refreshToken = await jwt.sign(payload, config.JWT_SECRET, {
+        expiresIn: "30d",
+    });
+    if (!accessToken || !refreshToken) {
+        throw new Error("Failed to generate tokens");
+    }
+    return { accessToken, refreshToken };
 };
 
 const User = mongoose.model<IUser>("User", AccountSchema);

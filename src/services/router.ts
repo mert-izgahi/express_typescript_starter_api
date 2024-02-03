@@ -1,12 +1,17 @@
+// Fixed Imports
 import express from "express";
+import { router as usersRouter } from "./@users";
+import { router as sessionRouter } from "./@sessions";
 
+// Custom Imports
 import { router as categoryRouter } from "./categories";
 import { router as productRouter } from "./products";
-import { router as usersRouter } from "./@users";
 
 const router = express.Router();
+router.use("/api", usersRouter);
+router.use("/api", sessionRouter);
 
 router.use("/api", categoryRouter);
 router.use("/api", productRouter);
-router.use("/api", usersRouter);
+
 export { router };

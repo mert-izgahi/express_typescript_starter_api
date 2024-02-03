@@ -42,3 +42,11 @@ export interface IController<T> {
     updateOne(req: Request<{ id: string }, {}, Partial<T>>, res: any): void;
     deleteOne(req: Request<{ id: string }>, res: any): void;
 }
+
+export interface TokenPayload {
+    _id: string;
+    name: string;
+    email: string;
+    role: string;
+    session: string;
+}
