@@ -71,14 +71,15 @@ export enum Actions {
     deleteOne = "deleteOne",
 }
 
-export type RoleDefinition = "*" | "admin" | "user";
-// | {
-//       action:
-//           | "*"
-//           | "createOne"
-//           | "getAll"
-//           | "getOneById"
-//           | "updateOne"
-//           | "deleteOne";
-//       role: "*" | "admin" | "user";
-//   };
+export type RoleDefinition =
+    | string
+    | {
+          action:
+              | "*"
+              | "createOne"
+              | "getAll"
+              | "getOneById"
+              | "updateOne"
+              | "deleteOne";
+          role: "*" | "admin" | "user";
+      };

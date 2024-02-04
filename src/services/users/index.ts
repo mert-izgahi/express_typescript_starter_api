@@ -1,6 +1,3 @@
-// Static Imports
-
-// Dynamic Imports
 import {
     BaseController,
     BaseRepository,
@@ -22,10 +19,6 @@ class UsersController extends BaseController<IUser> {
 
 const usersRepository = new UsersRepository();
 const usersController = new UsersController(usersRepository);
-
-const router = createBaseRouter<IUser>(usersController, {
-    prefix: "/users",
-    roles: ["admin"],
-});
+const router = createBaseRouter<IUser>(usersController);
 
 export { router };

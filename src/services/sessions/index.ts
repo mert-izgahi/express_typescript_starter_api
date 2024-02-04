@@ -138,19 +138,19 @@ router.post("/sessions", asyncWrapper(sessionController.createOne)); // login
 
 router.delete(
     "/sessions",
-    authorizedFor(["admin", "user"]),
+    authorizedFor("admin", "user"),
     asyncWrapper(sessionController.deleteAll)
 ); // logout all sessions
 
 router.get(
     "/sessions",
-    authorizedFor(["admin", "user"]),
+    authorizedFor("admin", "user"),
     asyncWrapper(sessionController.getAll)
 ); // get all active sessions
 
 router.delete(
     "/sessions/:id",
-    authorizedFor(["admin", "user"]),
+    authorizedFor("admin", "user"),
     asyncWrapper(sessionController.deleteOne)
 ); // logout
 
