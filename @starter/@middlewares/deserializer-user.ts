@@ -2,9 +2,10 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import config from "../../config";
 import { TokenPayload } from "../@types";
-import { User } from "../services/@users/model";
-import { Session } from "../services/@sessions/model";
+import { User } from "../@base/users/model";
+import { Session } from "../@base/sessions/model";
 import { logger } from "../@helpers";
+import { AuthenticationError } from "../@errors";
 
 const verifyToken = (
     token: string
@@ -37,7 +38,7 @@ const regenerateTokens = (
         const { decoded, expired } = await verifyToken(refreshToken);
         if (expired) {
             logger.error("Refresh token expired");
-            return reject(new Error("Refresh token expired"));
+            return reject(new AuthenticationError("Refresh token expired"));
         }
 
         const userId = decoded?._id;
@@ -87,10 +88,8 @@ export const deserializerUser = async (
                     return next();
                 }
 
-                const {
-                    accessToken: newAccessToken,
-                    refreshToken: newRefreshToken,
-                } = await regenerateTokens(refreshToken);
+                const { refreshToken: newRefreshToken } =
+                    await regenerateTokens(refreshToken);
                 res.setHeader("x-refresh-token", newRefreshToken);
 
                 const { decoded: newDecoded } = await verifyToken(

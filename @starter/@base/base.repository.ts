@@ -1,6 +1,6 @@
 import { Model, Document, FilterQuery } from "mongoose";
 import { IFilterOptions, IRepository } from "../@types";
-import { IUser } from "../services/@users/model";
+import { IUser } from "./users/model";
 
 export class BaseRepository<T extends Document> implements IRepository<T> {
     constructor(protected model: Model<T>) {}

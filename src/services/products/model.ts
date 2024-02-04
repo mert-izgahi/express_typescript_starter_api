@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { BaseDocument, BaseSchema } from "../../@base";
+import { BaseDocument, BaseSchema } from "../../../@starter/@base";
 
 interface IProduct extends BaseDocument {
     name: string;

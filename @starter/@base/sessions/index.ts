@@ -2,7 +2,7 @@
 import express, { Request, Response } from "express";
 import { Session } from "./model";
 import { sendResponse } from "../../@helpers";
-import { User } from "../@users/model";
+import { User } from "../users/model";
 import { AuthenticationError } from "../../@errors";
 import { asyncWrapper } from "../../@middlewares";
 import { authorizedFor } from "../../@middlewares/authorized-for";

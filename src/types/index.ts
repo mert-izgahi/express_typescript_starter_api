@@ -1,6 +1,4 @@
-import { IBaseDocument } from "../@base/base.types";
-
-// Application Models
+import { IBaseDocument } from "@starter";
 export interface ICategory extends Document, IBaseDocument {
     _id?: string;
     name: string;

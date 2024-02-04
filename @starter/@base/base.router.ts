@@ -2,7 +2,6 @@ import { asyncWrapper } from "../@middlewares";
 import { authorizedFor } from "../@middlewares/authorized-for";
 import { BaseController } from "./base.controller";
 import express from "express";
-import { IRoles } from "./base.types";
 
 const createBaseRouter = (
     controller: BaseController<any>,

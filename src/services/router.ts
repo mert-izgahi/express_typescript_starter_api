@@ -1,7 +1,6 @@
 // Fixed Imports
 import express from "express";
-import { router as usersRouter } from "./@users";
-import { router as sessionRouter } from "./@sessions";
+import { usersRouter, sessionRouter } from "@starter";
 
 // Custom Imports
 import { router as categoryRouter } from "./categories";

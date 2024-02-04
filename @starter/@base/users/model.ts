@@ -3,7 +3,7 @@ import validator from "validator";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import config from "../../../config";
-import { BaseDocument, BaseSchema } from "../../@base";
+import { BaseDocument, BaseSchema } from "..";
 import { TokenPayload } from "../../@types";
 
 interface IUser extends BaseDocument {
@@ -90,12 +90,11 @@ AccountSchema.methods.generateTokens = async function ({
         session: session,
     };
     const accessToken = await jwt.sign(payload, config.JWT_SECRET, {
-        //expiresIn: config.JWT_EXPIRE,
-        expiresIn: "3s",
+        expiresIn: config.ACCESS_TOKEN_EXPIRE_IN,
     });
 
     const refreshToken = await jwt.sign(payload, config.JWT_SECRET, {
-        expiresIn: "30d",
+        expiresIn: config.REFRESH_TOKEN_EXPIRE_IN,
     });
     if (!accessToken || !refreshToken) {
         throw new Error("Failed to generate tokens");

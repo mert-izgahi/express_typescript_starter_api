@@ -1,12 +1,12 @@
 import express from "express";
 import configs from "./config";
-import { logger, connectDB } from "./src/@helpers";
+import { logger, connectDB } from "./@starter/@helpers";
 import {
     notFound,
     errorHandler,
     filterApi,
     deserializerUser,
-} from "./src/@middlewares";
+} from "./@starter/@middlewares";
 import { router } from "./src/services/router";
 
 const app = express();

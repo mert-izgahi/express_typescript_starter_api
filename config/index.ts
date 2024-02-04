@@ -9,6 +9,7 @@ export default {
         process.env.MONGO_URI ||
         "mongodb://localhost:27017/express-typescript-starter-db",
     JWT_SECRET: process.env.JWT_SECRET || "secret",
-    JWT_EXPIRE: process.env.JWT_EXPIRE || "7d",
+    ACCESS_TOKEN_EXPIRE_IN: process.env.ACCESS_TOKEN_EXPIRE_IN || "7d",
+    REFRESH_TOKEN_EXPIRE_IN: process.env.REFRESH_TOKEN_EXPIRE_IN || "30d",
     SALT_ROUNDS: Number(process.env.SALT_ROUNDS) || 10,
 };
