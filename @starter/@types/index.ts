@@ -62,3 +62,23 @@ export interface IRoles {
     action: "createOne" | "getAll" | "getOneById" | "updateOne" | "deleteOne";
     role: "*" | "admin" | "user";
 }
+
+export enum Actions {
+    createOne = "createOne",
+    getAll = "getAll",
+    getOneById = "getOneById",
+    updateOne = "updateOne",
+    deleteOne = "deleteOne",
+}
+
+export type RoleDefinition = "*" | "admin" | "user";
+// | {
+//       action:
+//           | "*"
+//           | "createOne"
+//           | "getAll"
+//           | "getOneById"
+//           | "updateOne"
+//           | "deleteOne";
+//       role: "*" | "admin" | "user";
+//   };

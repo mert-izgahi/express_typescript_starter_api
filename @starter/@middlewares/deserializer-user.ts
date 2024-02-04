@@ -2,8 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import config from "../../config";
 import { TokenPayload } from "../@types";
-import { User } from "../@base/users/model";
-import { Session } from "../@base/sessions/model";
+import { User } from "../../src/services/users/model";
+import { Session } from "../../src/services/sessions/model";
 import { logger } from "../@helpers";
 import { AuthenticationError } from "../@errors";
 
@@ -78,6 +78,7 @@ export const deserializerUser = async (
             }
 
             const { decoded, expired } = await verifyToken(accessToken);
+
             if (expired) {
                 logger.info("Verifying Refresh Token");
                 const refreshToken = headers["x-refresh-token"] as

@@ -1,11 +1,10 @@
 // Static Imports
 import express, { Request, Response } from "express";
 import { Session } from "./model";
-import { sendResponse } from "../../@helpers";
+import { sendResponse } from "../../../@starter/@helpers";
 import { User } from "../users/model";
-import { AuthenticationError } from "../../@errors";
-import { asyncWrapper } from "../../@middlewares";
-import { authorizedFor } from "../../@middlewares/authorized-for";
+import { AuthenticationError } from "../../../@starter/@errors";
+import { asyncWrapper, authorizedFor } from "../../../@starter/@middlewares";
 
 const sessionController = {
     registerUser: async (
@@ -101,7 +100,7 @@ const sessionController = {
 
         const { _id } = user;
 
-        const sessions = await Session.updateMany(
+        await Session.updateMany(
             {
                 user: _id,
             },
@@ -139,19 +138,19 @@ router.post("/sessions", asyncWrapper(sessionController.createOne)); // login
 
 router.delete(
     "/sessions",
-    authorizedFor("admin", "user"),
+    authorizedFor(["admin", "user"]),
     asyncWrapper(sessionController.deleteAll)
 ); // logout all sessions
 
 router.get(
     "/sessions",
-    authorizedFor("admin", "user"),
+    authorizedFor(["admin", "user"]),
     asyncWrapper(sessionController.getAll)
 ); // get all active sessions
 
 router.delete(
     "/sessions/:id",
-    authorizedFor("admin", "user"),
+    authorizedFor(["admin", "user"]),
     asyncWrapper(sessionController.deleteOne)
 ); // logout
 

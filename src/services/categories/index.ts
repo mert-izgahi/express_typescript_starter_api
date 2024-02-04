@@ -2,14 +2,14 @@ import {
     BaseController,
     BaseRepository,
     createBaseRouter,
-} from "../../../@starter";
+} from "../../../@starter/@base";
 import { Category, ICategory } from "./model";
 
 const repository = new BaseRepository<ICategory>(Category);
 const controller = new BaseController<ICategory>(repository);
-const router = createBaseRouter(controller, {
+const router = createBaseRouter<ICategory>(controller, {
     prefix: "/categories",
-    roles: ["admin", "user"],
+    roles: ["user"],
 });
 
 export { router };

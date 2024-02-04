@@ -3,8 +3,8 @@ import validator from "validator";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import config from "../../../config";
-import { BaseDocument, BaseSchema } from "..";
-import { TokenPayload } from "../../@types";
+import { BaseDocument, BaseSchema } from "../../../@starter/@base";
+import { TokenPayload } from "../../../@starter/@types";
 
 interface IUser extends BaseDocument {
     name: string;

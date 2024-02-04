@@ -1,8 +1,11 @@
 // Static Imports
-import express from "express";
-import { BaseRepository, BaseController, createBaseRouter } from "..";
 
 // Dynamic Imports
+import {
+    BaseController,
+    BaseRepository,
+    createBaseRouter,
+} from "../../../@starter/@base";
 import { User, IUser } from "./model";
 
 class UsersRepository extends BaseRepository<IUser> {
@@ -20,15 +23,9 @@ class UsersController extends BaseController<IUser> {
 const usersRepository = new UsersRepository();
 const usersController = new UsersController(usersRepository);
 
-const _router = createBaseRouter(usersController, {
+const router = createBaseRouter<IUser>(usersController, {
     prefix: "/users",
-    roles: ["*"], // alow all users without access token
-    //roles: ["user"],  // allow only users
-    //roles: ["admin"], // allow only admins
-    // roles: ["user", "admin"],    // allow users and admins after auth
+    roles: ["admin"],
 });
-
-const router = express.Router();
-router.use(_router);
 
 export { router };

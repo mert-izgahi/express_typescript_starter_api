@@ -1,15 +1,13 @@
 import express from "express";
 import configs from "./config";
+import { router } from "./src/services/router";
+import { connectDB, logger } from "./@starter/@helpers";
 import {
-    logger,
-    connectDB,
-    notFound,
-    errorHandler,
     filterApi,
     deserializerUser,
-} from "./@starter";
-import { router } from "./src/services/router";
-
+    notFound,
+    errorHandler,
+} from "./@starter/@middlewares";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
