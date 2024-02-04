@@ -1,4 +1,8 @@
-import { BaseController, BaseRepository, createBaseRouter } from "@starter";
+import {
+    BaseController,
+    BaseRepository,
+    createBaseRouter,
+} from "../../../@starter";
 import { Product, IProduct } from "./model";
 
 const repository = new BaseRepository<IProduct>(Product);

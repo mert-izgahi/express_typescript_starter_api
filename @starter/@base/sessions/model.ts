@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import config from "../../../config";
-const JWT_EXPIRE = Number(config.JWT_EXPIRE.slice(0, -1));
+const JWT_EXPIRE = Number(config.ACCESS_TOKEN_EXPIRE_IN.slice(0, -1));
 console.log(JWT_EXPIRE);
 
 export interface ISession extends Document {
