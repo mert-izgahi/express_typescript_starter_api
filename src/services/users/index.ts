@@ -19,6 +19,9 @@ class UsersController extends BaseController<IUser> {
 
 const usersRepository = new UsersRepository();
 const usersController = new UsersController(usersRepository);
-const router = createBaseRouter<IUser>(usersController);
+const router = createBaseRouter<IUser>(usersController, {
+    middlewares: [],
+    roles: ["admin"],
+});
 
 export { router };

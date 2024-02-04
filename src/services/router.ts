@@ -6,14 +6,10 @@ import { router as productRouter } from "./products";
 import { authorizedFor } from "../../@starter/@middlewares";
 
 const initRoutes = (app: Express) => {
-    app.use("/api/users", authorizedFor("admin"), usersRouter);
-    app.use("/api/sessions", authorizedFor("admin", "user"), sessionRouter);
-    app.use(
-        "/api/categories",
-        authorizedFor("user", "admin", "*"),
-        categoryRouter
-    );
-    app.use("/api/products", authorizedFor("admin"), productRouter);
+    app.use("/api/users", usersRouter);
+    app.use("/api/sessions", sessionRouter);
+    app.use("/api/categories", categoryRouter);
+    app.use("/api/products", productRouter);
 };
 
 export { initRoutes };
