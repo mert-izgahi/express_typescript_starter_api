@@ -1,3 +1,5 @@
 {
-    "cSpell.words": ["izgahi", "Mert", "pino", "virtuals"]
+    "cSpell.words": ["izgahi", "Mert", "pino", "virtuals"],
+    "jest.jestCommandLine": "jest --detectOpenHandles --forceExit",
+    "jest.rootPath": "./jest.config.js"
 }

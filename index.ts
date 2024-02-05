@@ -17,5 +17,6 @@ const router = express.Router();
 router.use("/api/categories", categoryRouter);
 router.use("/api/products", productRouter);
 
-const server = new Server(PORT, MONGO_URI, router);
+const server = new Server(PORT, router);
+server.connectDb(MONGO_URI);
 server.start();
