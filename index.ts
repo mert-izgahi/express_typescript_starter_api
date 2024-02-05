@@ -1,28 +1,21 @@
+// Server
 import express from "express";
-import configs from "./config";
-import { initRoutes } from "./src/services/router";
-import {
-    connectDB,
-    logger,
-    filterApi,
-    deserializerUser,
-    notFound,
-    errorHandler,
-} from "./@starter";
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(filterApi);
-app.use(deserializerUser);
+import { Server } from "./@starter";
+
+// Src
+import { router as categoryRouter } from "./src/services/categories";
+import { router as productRouter } from "./src/services/products";
+
 // ENV
-const PORT = configs.PORT;
-const MONGO_URI = configs.MONGO_URI;
+import configs from "./config";
 
-app.listen(PORT, () => {
-    connectDB(MONGO_URI);
+const PORT: number = Number(configs.PORT) || 5000;
+const MONGO_URI: string = configs.MONGO_URI;
 
-    initRoutes(app);
-    app.use(notFound);
-    app.use(errorHandler);
-    logger.info("Server started on : http://localhost:" + PORT);
-});
+const router = express.Router();
+
+router.use("/api/categories", categoryRouter);
+router.use("/api/products", productRouter);
+
+const server = new Server(PORT, MONGO_URI, router);
+server.start();

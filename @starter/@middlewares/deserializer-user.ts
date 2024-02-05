@@ -38,7 +38,7 @@ const regenerateTokens = (
         const { decoded, expired } = await verifyToken(refreshToken);
         if (expired) {
             logger.error("Refresh token expired");
-            return reject(new AuthenticationError("Refresh token expired"));
+            resolve({ accessToken: "", refreshToken: "" });
         }
 
         const userId = decoded?._id;
@@ -50,13 +50,14 @@ const regenerateTokens = (
 
         const session = await Session.findOne({ user: userId });
         if (!session) {
-            return reject(new Error("Session not found"));
-        }
-        const tokens = await user.generateTokens({
-            session: session._id.toString() as string,
-        });
+            resolve({ accessToken: "", refreshToken: "" });
+        } else {
+            const tokens = await user.generateTokens({
+                session: session._id.toString() as string,
+            });
 
-        resolve(tokens);
+            resolve(tokens);
+        }
     });
 };
 
