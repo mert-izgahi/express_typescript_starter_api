@@ -1,8 +1,4 @@
-import {
-    BaseController,
-    BaseRepository,
-    createBaseRouter,
-} from "../../../@starter/@base";
+import { BaseController, BaseRepository, createBaseRouter } from "../@base";
 import { User, IUser } from "./model";
 
 class UsersRepository extends BaseRepository<IUser> {

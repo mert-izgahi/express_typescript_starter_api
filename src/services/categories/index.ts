@@ -1,8 +1,8 @@
 import {
-    BaseController,
     BaseRepository,
     createBaseRouter,
-} from "../../../@starter/@base";
+    BaseController,
+} from "../../../@starter";
 import { Category, ICategory } from "./model";
 
 const repository = new BaseRepository<ICategory>(Category);

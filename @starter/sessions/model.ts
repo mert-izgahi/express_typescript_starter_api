@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import config from "../../../config";
+import config from "../../config";
 const JWT_EXPIRE = Number(config.ACCESS_TOKEN_EXPIRE_IN.slice(0, -1));
 console.log(JWT_EXPIRE);
 

@@ -1,10 +1,10 @@
 // Static Imports
 import express, { Request, Response } from "express";
 import { Session } from "./model";
-import { sendResponse } from "../../../@starter/@helpers";
+import { sendResponse } from "../@helpers";
 import { User } from "../users/model";
-import { AuthenticationError } from "../../../@starter/@errors";
-import { asyncWrapper, authorizedFor } from "../../../@starter/@middlewares";
+import { AuthenticationError } from "../@errors";
+import { asyncWrapper, authorizedFor } from "../@middlewares";
 
 const sessionController = {
     registerUser: async (
@@ -132,24 +132,24 @@ const sessionController = {
 };
 
 const router = express.Router();
-router.post("/sessions/register", asyncWrapper(sessionController.registerUser)); // register
+router.post("/register", asyncWrapper(sessionController.registerUser)); // register
 
-router.post("/sessions", asyncWrapper(sessionController.createOne)); // login
+router.post("/", asyncWrapper(sessionController.createOne)); // login
 
 router.delete(
-    "/sessions",
+    "/",
     authorizedFor("admin", "user"),
     asyncWrapper(sessionController.deleteAll)
 ); // logout all sessions
 
 router.get(
-    "/sessions",
+    "/",
     authorizedFor("admin", "user"),
     asyncWrapper(sessionController.getAll)
 ); // get all active sessions
 
 router.delete(
-    "/sessions/:id",
+    "/:id",
     authorizedFor("admin", "user"),
     asyncWrapper(sessionController.deleteOne)
 ); // logout
